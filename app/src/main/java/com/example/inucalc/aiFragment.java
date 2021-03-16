@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class aiFragment extends Fragment {
     private ArrayList<Data_ai_recomm> arrayList;
@@ -36,6 +38,7 @@ public class aiFragment extends Fragment {
     private RecyclerView recyclerView2;
     private LinearLayoutManager linearLayoutManager2;
 
+    List<grades> grades;
 
     ImageButton ib_modify;
 
@@ -49,20 +52,31 @@ public class aiFragment extends Fragment {
         recyclerView = v.findViewById(R.id.rv);
         initData();
         setRecyclerView();
-        recyclerView2 = v.findViewById(R.id.rv2);
+
+      /*  recyclerView2 = v.findViewById(R.id.rv2);
         linearLayoutManager2 = new LinearLayoutManager(getContext());
         recyclerView2.setLayoutManager(linearLayoutManager2);
         arrayList2 = new ArrayList<>();
         mainAdapter2 = new Adapter_ai_recomm2(arrayList2);
         recyclerView2.setAdapter(mainAdapter2);   // 어댑터로부터 가져온 것을 리사이클러뷰에 셋팅
+*/
 
-
-
+/*
         for (int i = 0; i < 10; i++) {
             Data_ai_recomm2 mainData2 = new Data_ai_recomm2( "전공과목명", "C+", "A+", "4.35");
             arrayList2.add(mainData2);
             mainAdapter2.notifyDataSetChanged(); // 새로 고침까지 완료
-        }
+        }*/
+        AppDatabase db = Room.databaseBuilder(getContext(),AppDatabase.class,"grades")
+                .allowMainThreadQueries()
+                .build();
+        grades = db.gradesDAO().retack();
+        recyclerView2 = v.findViewById(R.id.rv2);
+      //  linearLayoutManager2 = new LinearLayoutManager(getContext());
+     //   recyclerView2.setLayoutManager(linearLayoutManager2);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext()));
+        mainAdapter2 = new Adapter_ai_recomm2(grades);
+        recyclerView2.setAdapter(mainAdapter2);
 
         ib_modify.setOnClickListener(new View.OnClickListener() {
             @Override

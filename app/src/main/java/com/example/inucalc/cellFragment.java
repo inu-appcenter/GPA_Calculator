@@ -21,6 +21,7 @@ public class cellFragment extends Fragment {
     EditText editSort;
     EditText editGrade;
     List<grades> grades;
+
     Button btn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

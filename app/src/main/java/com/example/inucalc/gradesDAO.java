@@ -12,6 +12,8 @@ import java.util.List;
 public interface gradesDAO {
     @Query("SELECT * FROM grades")
     List<grades> getAll();
+    @Query("SELECT * FROM grades WHERE score = 'C+'")
+    List<grades> retack();
     @Insert
     void insert(grades db);
     @Update

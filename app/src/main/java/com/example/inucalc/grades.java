@@ -63,4 +63,15 @@ public class grades {
     public void setPoint(int point) {
         this.point = point;
     }
+
+    @Override
+    public String toString() {
+        return "grades{" +
+                "name='" + name + '\'' +
+                ", semester='" + semester + '\'' +
+                ", score='" + score + '\'' +
+                ", sort='" + sort + '\'' +
+                ", point=" + point +
+                '}';
+    }
 }
